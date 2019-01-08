@@ -5,6 +5,41 @@ import {IsNumberOptions} from "./ValidationTypeOptions";
 import {ValidatorOptions} from "./ValidatorOptions";
 import {ValidationExecutor} from "./ValidationExecutor";
 import {ValidationOptions} from "../decorator/ValidationOptions";
+/* imports from validator packages */
+import * as isDivisibleBy from "validator/lib/isDivisibleBy";
+import * as isBoolean from "validator/lib/isBoolean";
+import * as isNumeric from "validator/lib/isNumeric";
+import * as contains from "validator/lib/contains";
+import * as isAlpha from "validator/lib/isAlpha";
+import * as isAlphanumeric from "validator/lib/isAlphanumeric";
+import * as isAscii from "validator/lib/isAscii";
+import * as isBase64 from "validator/lib/isBase64";
+import * as isByteLength from "validator/lib/isByteLength";
+import * as isCreditCard from "validator/lib/isCreditCard";
+import * as isCurrency from "validator/lib/isCurrency";
+import * as isEmail from "validator/lib/isEmail";
+import * as isFQDN from "validator/lib/isFQDN";
+import isFullWidth from "validator/lib/isFullWidth";
+import isHalfWidth from "validator/lib/isHalfWidth";
+import * as isVariableWidth from "validator/lib/isVariableWidth";
+import * as isHexColor from "validator/lib/isHexColor";
+import * as isHexadecimal from "validator/lib/isHexadecimal";
+import * as isIP from "validator/lib/isIP";
+import * as isISBN from "validator/lib/isISBN";
+import * as isISIN from "validator/lib/isISIN";
+import * as isISO8601 from "validator/lib/isISO8601";
+import * as isJSON from "validator/lib/isJSON";
+import * as isLowercase from "validator/lib/isLowercase";
+import * as isMobilePhone from "validator/lib/isMobilePhone";
+import * as isMongoId from "validator/lib/isMongoId";
+import * as isMultibyte from "validator/lib/isMultibyte";
+import * as isSurrogatePair from "validator/lib/isSurrogatePair";
+import * as isURL from "validator/lib/isURL";
+import * as isUUID from "validator/lib/isUUID";
+import * as isUppercase from "validator/lib/isUppercase";
+import * as isLength from "validator/lib/isLength";
+import * as matches from "validator/lib/matches";
+
 
 /**
  * Validator performs validation of the given object based on its metadata.
@@ -15,7 +50,6 @@ export class Validator {
     // Private Properties
     // -------------------------------------------------------------------------
 
-    private validatorJs = require("validator");
     private libPhoneNumber = {
         phoneUtil: require("google-libphonenumber").PhoneNumberUtil.getInstance(),
     };
@@ -393,7 +427,7 @@ export class Validator {
     isDivisibleBy(value: number, num: number): boolean {
         return  typeof value === "number" &&
             typeof num === "number" &&
-            this.validatorJs.isDivisibleBy(String(value), num);
+            isDivisibleBy(String(value), num);
     }
 
     /**
@@ -451,7 +485,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isBooleanString(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isBoolean(value);
+        return typeof value === "string" && isBoolean(value);
     }
 
     /**
@@ -459,7 +493,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isNumberString(value: string, options?: ValidatorJS.IsNumericOptions): boolean {
-        return typeof value === "string" && this.validatorJs.isNumeric(value, options);
+        return typeof value === "string" && isNumeric(value, options);
     }
 
     // -------------------------------------------------------------------------
@@ -471,7 +505,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     contains(value: string, seed: string): boolean {
-        return typeof value === "string" && this.validatorJs.contains(value, seed);
+        return typeof value === "string" && contains(value, seed);
     }
 
     /**
@@ -479,7 +513,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     notContains(value: string, seed: string): boolean {
-        return typeof value === "string" && !this.validatorJs.contains(value, seed);
+        return typeof value === "string" && !contains(value, seed);
     }
 
     /**
@@ -487,7 +521,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isAlpha(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isAlpha(value);
+        return typeof value === "string" && isAlpha(value);
     }
 
     /**
@@ -495,7 +529,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isAlphanumeric(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isAlphanumeric(value);
+        return typeof value === "string" && isAlphanumeric(value);
     }
 
     /**
@@ -503,7 +537,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isAscii(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isAscii(value);
+        return typeof value === "string" && isAscii(value);
     }
 
     /**
@@ -511,7 +545,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isBase64(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isBase64(value);
+        return typeof value === "string" && isBase64(value);
     }
 
     /**
@@ -519,7 +553,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isByteLength(value: string, min: number, max?: number): boolean {
-        return typeof value === "string" && this.validatorJs.isByteLength(value, min, max);
+        return typeof value === "string" && isByteLength(value, min, max);
     }
 
     /**
@@ -527,7 +561,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isCreditCard(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isCreditCard(value);
+        return typeof value === "string" && isCreditCard(value);
     }
 
     /**
@@ -535,7 +569,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isCurrency(value: string, options?: ValidatorJS.IsCurrencyOptions): boolean {
-        return typeof value === "string" && this.validatorJs.isCurrency(value, options);
+        return typeof value === "string" && isCurrency(value, options);
     }
 
     /**
@@ -543,7 +577,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isEmail(value: string, options?: ValidatorJS.IsEmailOptions): boolean {
-        return typeof value === "string" && this.validatorJs.isEmail(value, options);
+        return typeof value === "string" && isEmail(value, options);
     }
 
     /**
@@ -551,7 +585,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isFQDN(value: string, options?: ValidatorJS.IsFQDNOptions): boolean {
-        return typeof value === "string" && this.validatorJs.isFQDN(value, options);
+        return typeof value === "string" && isFQDN(value, options);
     }
 
     /**
@@ -559,7 +593,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isFullWidth(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isFullWidth(value);
+        return typeof value === "string" && isFullWidth(value);
     }
 
     /**
@@ -567,7 +601,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isHalfWidth(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isHalfWidth(value);
+        return typeof value === "string" && isHalfWidth(value);
     }
 
     /**
@@ -575,7 +609,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isVariableWidth(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isVariableWidth(value);
+        return typeof value === "string" && isVariableWidth(value);
     }
 
     /**
@@ -583,7 +617,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isHexColor(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isHexColor(value);
+        return typeof value === "string" && isHexColor(value);
     }
 
     /**
@@ -591,7 +625,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isHexadecimal(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isHexadecimal(value);
+        return typeof value === "string" && isHexadecimal(value);
     }
 
     /**
@@ -599,7 +633,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isIP(value: string, version?: "4"|"6"): boolean {
-        return typeof value === "string" && this.validatorJs.isIP(value, version);
+        return typeof value === "string" && isIP(value, version ? parseInt(version, 10) : undefined);
     }
 
     /**
@@ -607,7 +641,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isISBN(value: string, version?: "10"|"13"): boolean {
-        return typeof value === "string" && this.validatorJs.isISBN(value, version);
+        return typeof value === "string" && isISBN(value, version ? parseInt(version, 10) : undefined);
     }
 
     /**
@@ -615,7 +649,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isISIN(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isISIN(value);
+        return typeof value === "string" && isISIN(value);
     }
 
     /**
@@ -623,7 +657,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isISO8601(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isISO8601(value);
+        return typeof value === "string" && isISO8601(value);
     }
 
     /**
@@ -631,7 +665,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isJSON(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isJSON(value);
+        return typeof value === "string" && isJSON(value);
     }
 
     /**
@@ -639,7 +673,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isLowercase(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isLowercase(value);
+        return typeof value === "string" && isLowercase(value);
     }
 
     /**
@@ -648,7 +682,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isMobilePhone(value: string, locale: ValidatorJS.MobilePhoneLocale): boolean {
-        return typeof value === "string" && this.validatorJs.isMobilePhone(value, locale);
+        return typeof value === "string" && isMobilePhone(value, locale);
     }
 
     /**
@@ -673,7 +707,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isMongoId(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isMongoId(value);
+        return typeof value === "string" && isMongoId(value);
     }
 
     /**
@@ -681,7 +715,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isMultibyte(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isMultibyte(value);
+        return typeof value === "string" && isMultibyte(value);
     }
 
     /**
@@ -689,7 +723,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isSurrogatePair(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isSurrogatePair(value);
+        return typeof value === "string" && isSurrogatePair(value);
     }
 
     /**
@@ -697,7 +731,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isURL(value: string, options?: ValidatorJS.IsURLOptions): boolean {
-        return typeof value === "string" && this.validatorJs.isURL(value, options);
+        return typeof value === "string" && isURL(value, options);
     }
 
     /**
@@ -705,7 +739,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isUUID(value: string, version?: "3"|"4"|"5"): boolean {
-        return typeof value === "string" && this.validatorJs.isUUID(value, version);
+        return typeof value === "string" && isUUID(value, version);
     }
 
     /**
@@ -713,7 +747,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     isUppercase(value: string): boolean {
-        return typeof value === "string" && this.validatorJs.isUppercase(value);
+        return typeof value === "string" && isUppercase(value);
     }
 
     /**
@@ -721,7 +755,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     length(value: string, min: number, max?: number): boolean {
-        return typeof value === "string" && this.validatorJs.isLength(value, min, max);
+        return typeof value === "string" && isLength(value, min, max);
     }
 
     /**
@@ -745,7 +779,7 @@ export class Validator {
      * If given value is not a string, then it returns false.
      */
     matches(value: string, pattern: RegExp, modifiers?: string): boolean {
-        return typeof value === "string" && this.validatorJs.matches(value, pattern, modifiers);
+        return typeof value === "string" && matches(value, pattern, modifiers);
     }
 
     /**
