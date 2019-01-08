@@ -40,6 +40,10 @@ import * as isUppercase from "validator/lib/isUppercase";
 import * as isLength from "validator/lib/isLength";
 import * as matches from "validator/lib/matches";
 
+const root = typeof global === "object" ? global :
+    typeof window === "object" ? window :
+        typeof this === "object" ? this :
+            Function("return this;")();
 
 /**
  * Validator performs validation of the given object based on its metadata.
@@ -51,7 +55,7 @@ export class Validator {
     // -------------------------------------------------------------------------
 
     private libPhoneNumber = {
-        phoneUtil: require("google-libphonenumber").PhoneNumberUtil.getInstance(),
+        phoneUtil: root.LibPhonenumber.PhoneNumberUtil.getInstance(),
     };
 
     /**
