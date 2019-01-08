@@ -5,6 +5,11 @@
   "description": "Class-based validation with Typescript / ES6 / ES5 using decorators or validation schemas. Supports both node.js and browser",
   "license": "MIT",
   "readmeFilename": "README.md",
+  "types": "es/index.d.ts",
+  "main": "umd/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "sideEffects": false,
   "author": {
     "name": "Umed Khudoiberdiev",
     "email": "pleerock.me@gmail.com"

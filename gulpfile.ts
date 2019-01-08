@@ -69,20 +69,26 @@ export class Gulpfile {
             .pipe(tsProject());
 
         return [
-            tsResult.dts.pipe(gulp.dest("./build/package")),
+            tsResult.dts.pipe(gulp.dest("./build/package/umd")),
             tsResult.js
                 .pipe(sourcemaps.write(".", { sourceRoot: "", includeContent: true }))
-                .pipe(gulp.dest("./build/package"))
+                .pipe(gulp.dest("./build/package/umd"))
         ];
     }
 
-    /**
-     * Moves all compiled files to the final package directory.
-     */
-    @Task()
-    packageMoveCompiledFiles() {
-        return gulp.src("./build/package/src/**/*")
-            .pipe(gulp.dest("./build/package"));
+    @MergedTask()
+    packageCompileEs() {
+        const tsProject = ts.createProject("tsconfig.es.json");
+        const tsResult = gulp.src(["./src/**/*.ts"])
+            .pipe(sourcemaps.init())
+            .pipe(tsProject());
+
+        return [
+            tsResult.dts.pipe(gulp.dest("./build/package/es")),
+            tsResult.js
+                .pipe(sourcemaps.write(".", { sourceRoot: "", includeContent: true }))
+                .pipe(gulp.dest("./build/package/es"))
+        ];
     }
 
     /**
@@ -124,7 +130,7 @@ export class Gulpfile {
         return [
             "clean",
             "packageCompile",
-            "packageMoveCompiledFiles",
+            "packageCompileEs",
             "packageClearCompileDirectory",
             ["packagePreparePackageFile", "packageReadmeFile"]
         ];
